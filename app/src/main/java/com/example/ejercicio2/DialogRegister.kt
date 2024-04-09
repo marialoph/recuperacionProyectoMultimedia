@@ -10,38 +10,49 @@ import androidx.fragment.app.DialogFragment
 import com.example.ejercicio2.databinding.RegisteractivityBinding
 
 class DialogRegister (
+    //funcion que se ejecuta cuando de quiere registrar un nuevo usuario
     val onNewUserDialog: (User)-> Unit
 ): DialogFragment() {
 
 
-
+    //Método para crear el dialogo
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
 
         return activity?.let {
+            //Se crea un constructor de dialogo
             val builder = AlertDialog.Builder(activity)
-            val inflater = requireActivity().layoutInflater;  //objeto que necesita para inflar vistas
-            val viewDialogNewUser = inflater.inflate(R.layout.registeractivity, null) //vista inflada.
+            //Pra obtener el objeto necesario para inflar vistas
+            val inflater = requireActivity().layoutInflater;
+            //Infla la vista del dialogo
+            val viewDialogNewUser = inflater.inflate(R.layout.registeractivity, null)
             builder.setView(viewDialogNewUser)
-                // Add action buttons
+                // Agrega botones de accion, añadir y cancelar
                 .setPositiveButton("Añadir",
                     DialogInterface.OnClickListener { dialog, id ->
+                        //Los datos del nuevo usuario
                         val newUser = recoverDataLayout(viewDialogNewUser)
+                        //Verifica si algún campo está vacío
                         if (
                             newUser.name.isNullOrEmpty() ||
                             newUser.user.isNullOrEmpty() ||
                             newUser.passwordRegister.isNullOrEmpty() ||
                             newUser.email.isNullOrEmpty()
                         ){
+                            //En caso de que algún campo esté vació se mostrará un mensaje y se cancela el dialogo
                             Toast.makeText(activity, "Algún campo está vacío", Toast.LENGTH_LONG).show()
                             getDialog()?.cancel()
                         }else{
+                            //Si estan todos los campos rellenos llama a la funcion onNewUserDialog para registrar el nuevo usuario
                             onNewUserDialog(newUser)
                         }
                     })
+                //El botón cancelar
                 .setNegativeButton("Cancelar",
                     DialogInterface.OnClickListener { dialog, id ->
+                        //Se cancela con esa función
                         getDialog()?.cancel()
                     })
+            //Crea y devuelve el diálogo construido
             builder.create()
         } ?: throw IllegalStateException("El activity no puede ser nulo")
 
@@ -49,7 +60,9 @@ class DialogRegister (
     }
 
     private fun recoverDataLayout(view: View): User {
-        val binding = RegisteractivityBinding.bind(view) //a partir de la vista inflada, obtenemos el binding.
+        //Se obtiene la vista inflada, gracias el binding.
+        val binding = RegisteractivityBinding.bind(view)
+        //Devuelve los datos recuperados del diseño
         return User(
             binding.name.text.toString(),
             binding.user.text.toString(),

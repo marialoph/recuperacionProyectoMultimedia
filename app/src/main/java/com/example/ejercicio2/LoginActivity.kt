@@ -11,15 +11,19 @@ import com.example.ejercicio2.databinding.LoginactivityBinding
 
 
 class LoginActivity: AppCompatActivity() {
+    //Inicializado el binding, un boton y los dos campos, user y password
     private lateinit var binding: LoginactivityBinding
 
     private lateinit var btnLogin: Button
     private lateinit var textUser: EditText
     private lateinit var textPass: EditText
 
+
+    //Dos variables que al poner los datos de usuario y password funcionará ya que es un usuariio existente
     private val MYUSER = "maria"
     private val MYPASS = "123"
 
+    //El método onCreate infla el layout utilizando el binding, asociando el layout xml login
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = LoginactivityBinding.inflate(layoutInflater)
@@ -28,11 +32,15 @@ class LoginActivity: AppCompatActivity() {
     }
 
     private fun initEvent() {
-
+        //Inicializamos cada boton/texto con su id corresponiente al binding
         btnLogin = binding.buttonInicio
         textUser = binding.usuario
         textPass = binding.password
 
+        //Dentro del boton login tenemos.
+        //Un if donde si el usuario y password se corresponde al usuario existente llevará al MainActivity, sino es así se irá al else
+        //Otro if para el usuario que se ha registrado anteriormente, guarda los datos del usuario en preferencias compartidas y se hace un if si al validar el usuario y contraseña funciona llevará al MainActivity,
+        // sino saltará al else y se imprimirá un mensaje de error al acceder
         btnLogin.setOnClickListener {
             val usuario = textUser.text.toString()
             val password = textPass.text.toString()
@@ -62,26 +70,30 @@ class LoginActivity: AppCompatActivity() {
             }
         }
 
+        //Si queremos crear una cuenta pulsamos el boton de resgitro
         binding.buttonCrearCuenta.setOnClickListener {
             register()
     }
 
 }
+    //Método que al pulsar el boton saldrá un mensaje de registro de usuario,
     fun register(){
         Toast.makeText(this, "Registro de nuevo usuario", Toast.LENGTH_LONG).show()
+        //Se crea un dialogo de registro
+        //Lambda se ejecuta cuando pulse el boton de aceptar y llama a la funcion okNewUser para los datos que se han guardado del usuario
         val dialog = DialogRegister(){
                 user -> okOnNewUser(user)
         }
-        dialog.show(supportFragmentManager, "Registro de usuario")  //aquí se hace visible el Dialogo Fragment
+        //aquí se hace visible el Dialogo Fragment
+        dialog.show(supportFragmentManager, "Registro de usuario")
 
     }
     fun okOnNewUser(user: User){
-        //lógica que debéis hacer para almacenar más adelante ese usuario registrado.
+        //Almacena el usuario registrado y llama al método guardarDatosUsuario para guardar user y password
 
         val username = user.user
         val password = user.passwordRegister
 
-        // Llamar a la función para guardar los datos del usuario
         guardarDatosUsuario(username, password)
 
 
@@ -90,8 +102,12 @@ class LoginActivity: AppCompatActivity() {
     private fun guardarDatosUsuario(user: String, password: String) {
         // Guarda los datos del usuario en preferencias compartidas
         val sharedPreferences = getSharedPreferences("usuarios", Context.MODE_PRIVATE)
+
+        //Inicializo variable para modificar las preferencias compartidas
         val editor = sharedPreferences.edit()
-        editor.putString(user, password)  // Guardar nombre de usuario como clave y contraseña como valor
+        // Guardar los datos del usuario en las preferencias compartidas, utiliza nombre de usuario como clave y contraseña como valo
+        editor.putString(user, password)
+        //Se aplican los cambios a la variable editor
         editor.apply()
     }
 
