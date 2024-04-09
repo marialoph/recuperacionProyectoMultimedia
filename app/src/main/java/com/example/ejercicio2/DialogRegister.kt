@@ -10,7 +10,7 @@ import androidx.fragment.app.DialogFragment
 import com.example.ejercicio2.databinding.RegisteractivityBinding
 
 class DialogRegister (
-    //funcion que se ejecuta cuando de quiere registrar un nuevo usuario
+    //funcion que se ejecuta cuando se quiere registrar un nuevo usuario
     val onNewUserDialog: (User)-> Unit
 ): DialogFragment() {
 
