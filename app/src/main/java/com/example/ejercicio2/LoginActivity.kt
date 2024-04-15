@@ -20,8 +20,7 @@ class LoginActivity: AppCompatActivity() {
 
 
     //Dos variables que al poner los datos de usuario y password funcionará ya que es un usuariio existente
-    private val MYUSER = "maria"
-    private val MYPASS = "123"
+
 
     //El método onCreate infla el layout utilizando el binding, asociando el layout xml login
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,12 +44,6 @@ class LoginActivity: AppCompatActivity() {
             val usuario = textUser.text.toString()
             val password = textPass.text.toString()
 
-            if (usuario == MYUSER && password == MYPASS) {
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-                finish()
-
-            }else {
                 val sharedPreferences = getSharedPreferences("usuarios", Context.MODE_PRIVATE)
                 val validacionUsusario = sharedPreferences.getString(usuario, null)
 
@@ -68,12 +61,14 @@ class LoginActivity: AppCompatActivity() {
                     ).show()
                 }
             }
-        }
-
         //Si queremos crear una cuenta pulsamos el boton de resgitro
         binding.buttonCrearCuenta.setOnClickListener {
             register()
-    }
+
+        }
+
+
+
 
 }
     //Método que al pulsar el boton saldrá un mensaje de registro de usuario,
