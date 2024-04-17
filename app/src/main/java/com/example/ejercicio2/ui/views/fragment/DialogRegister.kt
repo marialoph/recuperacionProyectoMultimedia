@@ -1,4 +1,4 @@
-package com.example.ejercicio2
+package com.example.ejercicio2.ui.views.fragment
 
 import android.app.AlertDialog
 import android.app.Dialog
@@ -7,7 +7,9 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import com.example.ejercicio2.R
 import com.example.ejercicio2.databinding.RegisteractivityBinding
+import com.example.ejercicio2.domain.models.User
 
 class DialogRegister (
     //funcion que se ejecuta cuando se quiere registrar un nuevo usuario

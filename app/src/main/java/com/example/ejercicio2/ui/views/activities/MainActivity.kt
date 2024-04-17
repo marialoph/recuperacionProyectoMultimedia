@@ -1,7 +1,8 @@
-package com.example.ejercicio2
+package com.example.ejercicio2.ui.views.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.ejercicio2.R
 
 //Activity que al loguearse aparecerá una página con un texto realizado en el xml activity_main
 class MainActivity : AppCompatActivity() {

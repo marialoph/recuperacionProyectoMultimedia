@@ -1,4 +1,4 @@
-package com.example.ejercicio2
+package com.example.ejercicio2.ui.views.activities
 
 import android.content.Context
 import android.content.Intent
@@ -7,7 +7,9 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.ejercicio2.ui.views.fragment.DialogRegister
 import com.example.ejercicio2.databinding.LoginactivityBinding
+import com.example.ejercicio2.domain.models.User
 
 
 class LoginActivity: AppCompatActivity() {

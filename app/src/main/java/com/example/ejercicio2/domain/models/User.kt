@@ -1,4 +1,4 @@
-package com.example.ejercicio2
+package com.example.ejercicio2.domain.models
 
 //Clase user con los atributos necesarios para el registro
 class User {
