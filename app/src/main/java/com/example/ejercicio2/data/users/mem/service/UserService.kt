@@ -9,6 +9,10 @@ class UserService{
 
     private val listaUsuario = mutableListOf<User>()
 
+    init {
+        loadAllUsers(repository)
+    }
+
     fun loadAllUsers(repository:RepositoryObject){
         listaUsuario.addAll(repository.usuariosRegistrados)
     }
@@ -23,6 +27,7 @@ class UserService{
     fun registerUser(user: String, password: String, name:String, email:String): User? {
         val newUser = User(name, user, password, email)
         repository.addUser(newUser)
+        listaUsuario.add(newUser)
         return newUser
     }
 }
